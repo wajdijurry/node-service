@@ -1,0 +1,42 @@
+version: "3.8"
+services:
+  expressjs:
+    build:
+      context: .
+    command: npm start
+    ports:
+      - 3000:3000
+    volumes:
+      - .:/app
+      - /app/node_modules
+    networks:
+      node-microservice-network:
+         ipv4_address: 11.5.0.2
+    depends_on:
+      - mongodb
+
+  mongodb:
+      image: mongo:latest
+      container_name: mongodbn
+      environment:
+        MONGO_INITDB_DATABASE: mongo
+        MONGO_INITDB_ROOT_USERNAME: root
+        MONGO_INITDB_ROOT_PASSWORD: root
+          #lport eli bch naamlou expose
+      ports:
+            - 27019:27017
+      networks:
+        node-microservice-network:
+          ipv4_address: 11.5.0.4
+      volumes:
+        - ./init-mongo.js:/docker-entrypoint-initdb.d/init-mongo-js:ro
+        - ./storage/database:/data/db
+
+networks:
+  node-microservice-network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 11.5.0.0/16
+
+

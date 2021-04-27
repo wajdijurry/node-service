@@ -1,0 +1,27 @@
+extends layout
+
+block content
+    html
+        head
+        body
+            .question-box
+                #octo.octo
+                |
+                if (posts_list.length)
+                    each post in posts_list
+                        div.col-md-12
+                            div.card
+                                div.card-header
+                                    span='User name: ' + post.user.name
+                                    span.float-right
+                                        a(href="javascript:;", onclick="getLikers('" + post._id + "')") Likes(#{post.likes_count})
+                                div.card-body='Body: ' + post.body
+                                div.card-footer
+                                    div.float-right
+                                        a.btn.btn-primary(href="javascript:;", onclick="likePost('" + post._id + "')") Like
+                    else
+                        h4.mt-5 No posts found
+                a.btn.btn-warning(href='/createform') New Post
+
+
+
