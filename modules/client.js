@@ -25,7 +25,7 @@ module.exports = {
                         if (msg.properties.correlationId == correlationId) {
                             console.log(' [.] Got %s', msg.content.toString());
                             result = JSON.parse(msg.content.toString());
-                            callback(result.data);
+                            callback(result);
                             setTimeout(function() {
                                 connection.close();
                             }, 500);

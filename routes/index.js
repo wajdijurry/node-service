@@ -60,9 +60,9 @@ user methods
  */
 
 //Log in
-router.post('/signin', userController.sign_in);
+router.get('/signin', userController.sign_in);
 //Log out
 router.get('/signout', userController.sign_out);
 //Sign in
-router.post('/signup', userController.sign_up);
+router.get('/signup', userController.sign_up);
 module.exports = router;
