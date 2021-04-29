@@ -8,8 +8,8 @@ exports.sign_in = function (req, res) {
         },
         query: null,
         body:{
-            email: "mama@gmail.com",
-            password: "12345678"
+            email: req.body.email,
+            password: req.body.password
         }
     }, function (result, error) {
         if (error) {
@@ -33,6 +33,7 @@ exports.sign_out = function (req,res){
 }
 
 exports.sign_up = function (req,res){
+    console.log([req.body.name]);
     client.send_sync('hellolaravel', {
         route: "/api/user/register",
         method: "POST",

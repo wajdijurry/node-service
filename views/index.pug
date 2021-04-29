@@ -6,31 +6,31 @@ block content
     body
       #container.container
         .form-container.sign-up-container
-          form
+          form(action='/signup', method='post')
             h1 Sign Up
             |
             span or use your email for registration
             |
-            input(type='text', placeholder='Name')
+            input(type='text', name='name', placeholder='Name')
             |
-            input(type='email', placeholder='Email')
+            input(type='email', name='email', placeholder='Email')
             |
-            input(type='password', placeholder='Password')
+            input(type='password', name='password', placeholder='Password')
             |
-            a.btn.btn-link(href='/signup') Sign Up
+            input.btn.btn-primary(type='submit', value='Sign Up')
         |
         .form-container.sign-in-container
-          form
+          form(action='/signin', method='post')
             h1 Sign In
             span or use your account
             |
-            input(type='email', placeholder='Email')
+            input(type='email', name='email', placeholder='Email')
             |
-            input(type='password', placeholder='Password')
+            input(type='password', name='password', placeholder='Password')
             |
             a(href='#') Forgot your password?
             |
-            a.btn.btn-link(href='/signin') Sign In
+            input.btn.btn-primary(type='submit', value='Sign In')
         |
         .overlay-container
           .overlay
