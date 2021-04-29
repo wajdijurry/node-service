@@ -9,7 +9,14 @@ exports.posts_list = function (req, res) {
         },
         query: null,
         body: null
-    }, function (posts_list) {
+    }, function (posts_list, error) {
+        if (error) {
+            res.render('error', {
+                error_message: error.message,
+                error_status: error.status
+            });
+            return;
+        }
         res.render('view_posts', {
             posts_list: posts_list.data
         });

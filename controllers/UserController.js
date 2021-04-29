@@ -11,7 +11,14 @@ exports.sign_in = function (req, res) {
             email: "mama@gmail.com",
             password: "12345678"
         }
-    }, function (result) {
+    }, function (result, error) {
+        if (error) {
+            res.render('error', {
+                error_message: error.message,
+                error_status: error.status
+            });
+            return;
+        }
         res.cookie('accessToken', result.data.token, {
             secure: true,
             httpOnly: true,
@@ -34,12 +41,19 @@ exports.sign_up = function (req,res){
         },
         query: null,
         body: {
-            name: "user1",
-            email: "user1@gmail.com",
-            password: "123456783"
+            name: req.body.name,
+            email: req.body.email,
+            password: req.body.password
         }
-    }, function (result) {
-        res.cookie('accessToken', result.data, {
+    }, function (result, error) {
+        if (error) {
+            res.render('error', {
+                error_message: error.message,
+                error_status: error.status
+            });
+            return;
+        }
+        res.cookie('accessToken', result.data.token, {
             secure: true,
             httpOnly: true,
         });

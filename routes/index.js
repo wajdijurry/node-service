@@ -1,7 +1,7 @@
 var mongoose = require("mongoose");
 var express = require('express');
 var router = express.Router();
-var notificationcontroller = require('../controllers/Notificationcontroller');
+var notificationController = require('../controllers/Notificationcontroller');
 var postController = require('../controllers/PostController');
 var userController = require('../controllers/UserController')
 
@@ -40,9 +40,9 @@ router.get('/', function(req, res, next) {
 // // Create a new Note
 // router.get('/notifications', Notification_controller.create);
 // getAll Notes
-router.get('/notifications',notificationcontroller.findAll);
+router.get('/notifications',notificationController.findAll);
 // Retrieve notifications list by userId
-router.get('/notifications/:userId', notificationcontroller.findOne);
+router.get('/notifications/:userId', notificationController.findOne);
 /*
 Post methods
  */
