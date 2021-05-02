@@ -22,6 +22,8 @@ Post methods
 
 router.get('/render_create_form', auth, postController.render_create_form);
 
+router.get('/render_edit_form/:id', auth, postController.render_edit_form);
+
 // Posts Creation Form
 router.post('/create_post',auth,postController.create_post);
 
@@ -30,10 +32,11 @@ router.get('/postlist',auth, postController.posts_list);
 // // save Post
 // router.post('/save_posts',auth, postController.save_posts);
 
+
 // update post
-router.put('/update_post',auth,postController.update_post);
+router.post('/update_post',auth,postController.update_post);
 //delete post
-// router.delete('/delete_post/{id}',auth,postController.delete_post());
+router.get('/delete_post/:id',auth,postController.delete_post);
 //like post
 // router.post('/like_post',auth,postController.like_post());
 /*

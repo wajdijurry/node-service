@@ -23,11 +23,8 @@ block content
                                         else
                                             a.btn.btn-primary(href="javascript:;", onclick="like_post('" + post._id + "')") Like
                                         if (post.is_owner)
-                                            a.btn.btn-success(href="javascript:;", onclick="update_post('" + post._id + "')") Update
-                                            a.btn.btn-danger(href="javascript:;", onclick="delete_post('" + post._id + "')") delete
+                                            a.btn.btn-success(href="/render_edit_form/"+post._id) Update
+                                            a.btn.btn-danger(href='/delete_post/'+post._id, onclick="return confirm('Are you sure ?')") Delete
                     else
                         h4.mt-5 No posts found
                 a.btn.btn-warning(href='render_create_form') New Post
-
-
-

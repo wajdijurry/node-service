@@ -24,7 +24,10 @@ module.exports = {
                     channel.consume(q.queue, function(msg) {
                         if (msg.properties.correlationId == correlationId) {
                             console.log(' [.] Got %s', msg.content.toString());
-                            result = JSON.parse(msg.content.toString());
+                            let response = msg.content.toString();
+                            if (response) {
+                                result = JSON.parse(response);
+                            }
                             let error = null;
                             if (result.hasOwnProperty('hasError')) {
                                 error = result;
