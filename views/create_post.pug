@@ -18,18 +18,16 @@ block content
             .form-box.hidden
                 #octo.octo
                 |
-                form(action='/savepost' method='POST' id='contact-form')
+                form(action='/create_post' method='POST' id='contact-form')
                     .text-box
                         label(for='message') Your Post
                         |
-                        textarea#message(name='message', placeholder='Write text here....', cols='30', rows='8')
+                        textarea#message( name='body' placeholder='Write text here....', cols='30', rows='8')
                         |
                         .btns-box
                             button.send-btn.custom-btn(type='submit') Send
                             |
                             button.cancel-btn.custom-btn(type='button') Cancel
-            |
-            script(src='js/script.js')
             |
             |
             style.

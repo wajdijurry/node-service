@@ -22,35 +22,35 @@ exports.create = function(req, res) {
     });
 };
 
-// Find notification list by userId
-    exports.findOne = (req, res) => {
-        Notification.findById(req.params.user_id)
-            .then(notification => {
-                if (!notification) {
-                    return res.status(404).send({
-                        message: "Notification not found with id " + req.params.user_id
-                    });
-                }
-                res.send(notification);
-            }).catch(err => {
-            if (err.kind === 'ObjectId') {
-                return res.status(404).send({
-                    message: "Notification not found with id " + req.params.user_id
-                });
-            }
-            return res.status(500).send({
-                message: "Error retrieving notification with id " + req.params.user_id
-            });
-        });
-    };
+// // Find notification list by userId
+//     exports.findOne = (req, res) => {
+//         Notification.findById(req.params.userId)
+//             .then(notification => {
+//                 if (!notification) {
+//                     return res.status(404).send({
+//                         message: "Notification not found with id " + req.params.userId
+//                     });
+//                 }
+//                 res.send(notification);
+//             }).catch(err => {
+//             if (err.kind === 'ObjectId') {
+//                 return res.status(404).send({
+//                     message: "Notification not found with id " + req.params.userId
+//                 });
+//             }
+//             return res.status(500).send({
+//                 message: "Error retrieving notification with id " + req.params.userId
+//             });
+//         });
+//     };
 
 
 // Retrieve and return all notifications from the database.
 exports.findAll = (req, res) => {
     let criteria = {};
 
-    let userId = req.query.user_id;
-    let postId = req.query.post_id;
+    let userId = req.query.userId;
+    let postId = req.query.postId;
 
     if(userId) {
         criteria.userId = userId;

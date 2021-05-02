@@ -18,10 +18,16 @@ block content
                                 div.card-body='Body: ' + post.body
                                 div.card-footer
                                     div.float-right
-                                        a.btn.btn-primary(href="javascript:;", onclick="likePost('" + post._id + "')") Like
+                                        if (post.is_liked)
+                                            a.btn.btn-warning(href="javascript:;", onclick="unlike_post('" + post._id + "')") Un Like
+                                        else
+                                            a.btn.btn-primary(href="javascript:;", onclick="like_post('" + post._id + "')") Like
+                                        if (post.is_owner)
+                                            a.btn.btn-success(href="javascript:;", onclick="update_post('" + post._id + "')") Update
+                                            a.btn.btn-danger(href="javascript:;", onclick="delete_post('" + post._id + "')") delete
                     else
                         h4.mt-5 No posts found
-                a.btn.btn-warning(href='/createform') New Post
+                a.btn.btn-warning(href='render_create_form') New Post
 
 
 

@@ -14,20 +14,28 @@ router.get('/', function(req, res, next) {
 // getAll Notes
 router.get('/notifications',auth,notificationController.findAll);
 // Retrieve notifications list by userId
-router.get('/notifications/:userId',auth, notificationController.findOne);
+// router.get('/notifications/:userId',auth, notificationController.findOne);
 
 /*
 Post methods
  */
 
+router.get('/render_create_form', auth, postController.render_create_form);
+
 // Posts Creation Form
-router.get('/createform',postController.create_post);
+router.post('/create_post',auth,postController.create_post);
 
 // Posts list
 router.get('/postlist',auth, postController.posts_list);
-// save Post
-router.post('/savepost',auth, postController.save_posts);
+// // save Post
+// router.post('/save_posts',auth, postController.save_posts);
 
+// update post
+router.put('/update_post',auth,postController.update_post);
+//delete post
+// router.delete('/delete_post/{id}',auth,postController.delete_post());
+//like post
+// router.post('/like_post',auth,postController.like_post());
 /*
 user methods
  */

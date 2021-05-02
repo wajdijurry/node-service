@@ -1,16 +1,14 @@
 module.exports = (req, res, next) => {
     try {
-        const token = req.headers.authorization.split(' ')[1];
-        const decodedToken = jwt.verify(token, 'access_token');
-        const userId = decodedToken.userId;
-        if (req.body.userId && req.body.userId !== userId) {
-            throw 'Invalid user ID';
-        } else {
+        if(req.cookies.accessToken){
             next();
+        } else {
+         res.redirect('/');
         }
-    } catch {
-        res.status(401).json({
-            error: new Error('Invalid request!')
+    } catch(error) {
+        res.render('error', {
+            error_message:error.message,
+            error_status:500
         });
     }
 };

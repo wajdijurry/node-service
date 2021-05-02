@@ -19,10 +19,7 @@ exports.sign_in = function (req, res) {
             });
             return;
         }
-        res.cookie('accessToken', result.data.token, {
-            secure: true,
-            httpOnly: true,
-        });
+        res.cookie('accessToken', result.data.token);
         res.redirect('/postlist');
     });
 }
@@ -33,7 +30,6 @@ exports.sign_out = function (req,res){
 }
 
 exports.sign_up = function (req,res){
-    console.log([req.body.name]);
     client.send_sync('hellolaravel', {
         route: "/api/user/register",
         method: "POST",
@@ -54,10 +50,7 @@ exports.sign_up = function (req,res){
             });
             return;
         }
-        res.cookie('accessToken', result.data.token, {
-            secure: true,
-            httpOnly: true,
-        });
+        res.cookie('accessToken', result.data.token);
         res.redirect('/postlist');
     });
 }

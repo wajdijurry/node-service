@@ -18,12 +18,11 @@ block content
                         ul
                         each notification in notifications
                             .label
-                                li='User Id: ' + notification.user_id + ', Post Id: ' + notification.post_id + ', Created at: ' + notification.createdAt
+                                li='User Id: ' + notification.userId + ', Post Id: ' + notification.postId + ', Created at: ' + notification.createdAt
                     else
                         h4.mt-5 No notifications found
-            |
-            script(src='js/script.js')
-            |
+
+
             |
             style.
                 body, html {
