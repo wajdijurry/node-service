@@ -22,9 +22,9 @@ block content
                     .text-box
                         label(for='message') Your Post
                         |
-                        textarea#message( name='body' placeholder='Write text here....', cols='30', rows='8')
+                        textarea#message( name='body' placeholder='Write text here....', cols='30', rows='8') #{post_text}
                         |
-                        input(type='hidden', value=post_id)
+                        input(type='hidden', name='post_id', value=post_id)
                         |
                         .btns-box
                             button.send-btn.custom-btn(type='submit') Send

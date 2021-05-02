@@ -104,7 +104,26 @@ exports.render_create_form = function (req, res) {
 }
 
 exports.render_edit_form = function (req, res) {
-    res.render('update_post', {
-        post_id: req.params.id
+    client.send_sync('hellolaravel', {
+        route: "/api/post/"+req.params.id,
+        method: "GET",
+        headers: {
+            Accept:"application/json",
+            Authorization: "Bearer "+req.cookies.accessToken
+        },
+        query: null,
+        body: null
+    }, function (post, error) {
+        if (error) {
+            res.render('error', {
+                error_message: error.message,
+                error_status: error.status
+            });
+            return;
+        }
+        res.render('update_post', {
+            post_id: post._id,
+            post_text: post.body
+        });
     });
 }
