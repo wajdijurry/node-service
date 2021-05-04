@@ -29,8 +29,6 @@ router.post('/create_post',auth,postController.create_post);
 
 // Posts list
 router.get('/postlist',auth, postController.posts_list);
-// // save Post
-// router.post('/save_posts',auth, postController.save_posts);
 
 
 // update post
@@ -38,7 +36,7 @@ router.post('/update_post',auth,postController.update_post);
 //delete post
 router.get('/delete_post/:id',auth,postController.delete_post);
 //like post
-// router.post('/like_post',auth,postController.like_post());
+router.post('/like_post/:id',auth,postController.like_post);
 /*
 user methods
  */
@@ -49,4 +47,5 @@ router.post('/signin', userController.sign_in);
 router.get('/signout', userController.sign_out);
 //Sign in
 router.post('/signup', userController.sign_up);
+
 module.exports = router;

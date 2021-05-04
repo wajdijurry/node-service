@@ -1,30 +1,96 @@
 extends layout
-
 block content
-    html
-        head
-        body
-            .question-box
-                #octo.octo
-                |
-                if (posts_list.length)
-                    each post in posts_list
-                        div.col-md-12
-                            div.card
-                                div.card-header
-                                    span='User name: ' + post.user.name
-                                    span.float-right
-                                        a(href="javascript:;", onclick="getLikers('" + post._id + "')") Likes(#{post.likes_count})
-                                div.card-body='Body: ' + post.body
-                                div.card-footer
-                                    div.float-right
-                                        if (post.is_liked)
-                                            a.btn.btn-warning(href="javascript:;", onclick="unlike_post('" + post._id + "')") Un Like
-                                        else
-                                            a.btn.btn-primary(href="javascript:;", onclick="like_post('" + post._id + "')") Like
-                                        if (post.is_owner)
-                                            a.btn.btn-success(href="/render_edit_form/"+post._id) Update
-                                            a.btn.btn-danger(href='/delete_post/'+post._id, onclick="return confirm('Are you sure ?')") Delete
-                    else
-                        h4.mt-5 No posts found
-                a.btn.btn-warning(href='render_create_form') New Post
+    h1.mt-5 Posts list
+    a.btn.btn-warning(href='render_create_form' style="float:right") New Post
+    .question-box
+        #octo.octo
+        |
+        if (posts_list.length)
+            each post in posts_list
+                div.col-md-12
+                    div.card
+                        div.card-header
+                            span='User name: ' + post.user.name
+                            span.float-right
+                                img.imageLike(src="/images/like.png")
+                                a(id="likes-count-"+post._id, href="javascript:;", onclick="getLikers('" + post._id + "')") #{post.likes_count}
+
+                        div.card-body='Body: ' + post.body
+                        div.card-footer
+                            div.float-right
+                                if (post.is_liked)
+                                    a.btn.btn-warning.unlike-post(href="javascript:;", onclick="unlike_post('" + post._id + "')", data-post-id=post._id) UnLike
+                                else
+                                    a.btn.btn-primary.like-post(href='javascript:;', data-post-id=post._id) Like
+                                if (post.is_owner)
+                                    a.btn.btn-success(href="/render_edit_form/" + post._id) Update
+                                    a.btn.btn-danger(href='/delete_post/' + post._id, onclick="return confirm('Are you sure ?')") Delete
+            else
+                h4.mt-5 No posts found
+
+block scripts
+    script(src='https://code.jquery.com/jquery-3.6.0.min.js')
+    script.
+        $(function () {
+            $(document).on('click', '.like-post', function () {
+                let like_button = $(this);
+                let post_id = $(this).data('post-id');
+                $.ajax({
+                    type: "POST",
+                    url: "/like_post/" + post_id,
+                    success: function () {
+                        let current_likes_count = parseInt($('#likes-count-'+post_id).text());
+                        $('#likes-count-'+post_id).text(current_likes_count + 1);
+                        like_button.replaceWith('<a href="javascript:;" class="btn btn-warning unlike-post" data-post-id="' + post_id + '">Unlike</a>');
+                    },
+                    error: function (error) {
+                        alert('Post cant be liked');
+                    }
+                });
+            });
+            $(document).on('click', '.unlike-post', function () {
+                let unlike_button = $(this);
+                let post_id = $(this).data('post-id');
+                $.ajax({
+                    type: "POST",
+                    url: "/unlike_post/" + post_id,
+                    success: function () {
+                        let current_likes_count = parseInt($('#likes-count-' + post_id).text());
+                        $('#likes-count-' + post_id).text(current_likes_count - 1);
+                        unlike_button.replaceWith('<a href="javascript:;" class="btn btn-primary like-post" data-post-id="' + post_id + '">Like</a>');
+                    },
+                    error: function (error) {
+                        alert('Post cant be unliked');
+                    }
+                });
+            });
+        });
+
+block style
+    Style.
+        .card{
+            margin-top:2em;
+             font-family: cursive;
+        }
+        .btn{
+            margin:0.5em;
+        }
+        .question-box {
+              width: 50%;
+              position: relative;
+              left: 25%;
+                        }
+        body  {
+             background:#98d4f3;
+        }
+        .float-right{
+            display:flex
+        }
+        .imageLike{
+            width: 20px;
+            margin-right: 8px;
+        }
+        .h1, h1 {
+          font-size: 2.5rem;
+          text-align: center;
+          padding-top: 2em;

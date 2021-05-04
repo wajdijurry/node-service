@@ -4,12 +4,6 @@ block content
     html
         head
         body
-            #fish.fish
-            |
-            #fish2.fish
-            |
-            #fish3.fish
-            |
             .question-box
                 h2 Would you like to say something?
                 |
@@ -63,7 +57,7 @@ block content
                     color: #F90;
                 }
 
-                .question-box, .form-box, .thanks-msg-box {
+                .question-box, .form-box {
                     width: 30%;
                     position: absolute;
                     top: 50%;
@@ -72,11 +66,6 @@ block content
                     display: flex;
                     flex-direction: column;
                 }
-
-                .thanks-msg-box {
-                    text-align: center;
-                }
-
                 .question-box {
                     align-items: center;
                     text-align: center;
@@ -164,36 +153,6 @@ block content
                     to {
                         transform: translate3d(0, 200px, 0);
                     }
-                }
-
-                .fish {
-                    background-image: url('http://www.geertjanhendriks.nl/codepen/form/fish.png');
-                    width: 235px;
-                    height: 104px;
-                    margin-left: -235px;
-                    position: absolute;
-                    animation: myfishanimation 24s;
-                    -webkit-animation: myfishanimation 24s;
-                    animation-iteration-count: infinite;
-                    -webkit-animation-iteration-count: infinite;
-                    animation-timing-function: linear;
-                    -webkit-animation-timing-function: linear;
-                }
-
-                #fish {
-                    top: 120px;
-                }
-
-                #fish2 {
-                    top: 360px;
-                    animation-delay: 12s;
-                    -webkit-animation-delay: 12s;
-                }
-
-                #fish3 {
-                    top: 600px;
-                    animation-delay: 6s;
-                    -webkit-animation-delay: 6s;
                 }
 
                 .octo {
