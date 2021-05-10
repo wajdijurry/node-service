@@ -3,8 +3,9 @@
 const queue_name = 'nodejs';
 var amqp = require('amqplib/callback_api');
 var io = require('../modules/socket');
+var config = require('../config/config');
 
-amqp.connect('amqp://172.18.0.1', function(error0, connection) {
+amqp.connect(config.rabbitmq.host, function(error0, connection) {
     if (error0) {
         throw error0;
     }
