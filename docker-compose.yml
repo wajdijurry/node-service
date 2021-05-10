@@ -1,4 +1,4 @@
-version: "3.8"
+version: "3.1"
 services:
   expressjs:
     build:
@@ -6,18 +6,19 @@ services:
     command: npm start
     ports:
       - 3000:3000
+      - 8080:8080
     volumes:
       - .:/app
       - /app/node_modules
     networks:
       node-microservice-network:
-         ipv4_address: 11.5.0.2
+         ipv4_address: 13.5.0.2
     depends_on:
-      - mongodb
+      - mongo-node
+    restart: on-failure
 
-  mongodb:
+  mongo-node:
       image: mongo:latest
-      container_name: mongodbn
       environment:
         MONGO_INITDB_DATABASE: mongo
         MONGO_INITDB_ROOT_USERNAME: root
@@ -27,7 +28,7 @@ services:
             - 27019:27017
       networks:
         node-microservice-network:
-          ipv4_address: 11.5.0.4
+          ipv4_address: 13.5.0.4
       volumes:
         - ./init-mongo.js:/docker-entrypoint-initdb.d/init-mongo-js:ro
         - ./storage/database:/data/db
@@ -37,6 +38,6 @@ networks:
     driver: bridge
     ipam:
       config:
-        - subnet: 11.5.0.0/16
+        - subnet: 13.5.0.0/16
 
 

@@ -10,6 +10,7 @@ html(lang='en')
     link(rel='canonical' href='https://getbootstrap.com/docs/4.0/examples/sticky-footer-navbar/')
     // Bootstrap core CSS
     link(href='//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css' rel='stylesheet')
+    link(href='//ksylvest.github.io/jquery-growl/stylesheets/jquery.growl.css' rel='stylesheet')
     // Custom styles for this template
     link(href='/stylesheets/style.css' rel='stylesheet')
   body
@@ -49,6 +50,15 @@ html(lang='en')
     script(src='//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js')
     block scripts
     |
+    script(src='http://localhost:8080/socket.io/socket.io.js')
+    script(src='//ksylvest.github.io/jquery-growl/javascripts/jquery.growl.js')
+    script.
+      var socket = io.connect('http://localhost:8080');
+      socket.emit('subscribe', 'mychannel');
+      socket.on('mychannel', function(data) {
+        message = JSON.parse(data.message);
+        $.growl.notice({ title: "Nice!", message: message.user_name + " liked your post", location: 'br' });
+      });
     block style
     Style.
       .btn{

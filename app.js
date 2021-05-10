@@ -60,4 +60,5 @@ function connect() {
     authSource: config.db.dbName
   });
 }
+
 module.exports = app;
