@@ -10,6 +10,17 @@ module.exports = {
 
     socket : any = io.on('connection', (socket) => {
         console.log('User Socket Connected');
+
+        socket.on('subscribe', function(room) {
+            console.log('joining room', room);
+            socket.join(room);
+        });
+
+        socket.on('unsubscribe', function(room) {
+            console.log('leaving room', room);
+            socket.leave(room);
+        });
+
         socket.on("disconnect", () => console.log(`${socket.id} User disconnected.`));
     })
 };

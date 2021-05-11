@@ -49,12 +49,9 @@ exports.create = function(req, res) {
 exports.findAll = (req, res) => {
     let criteria = {};
 
-    let userId = req.query.userId;
     let postId = req.query.postId;
 
-    if(userId) {
-        criteria.userId = userId;
-    }
+    criteria.userId = req.logged_in_user_id;
 
     if (postId) {
         criteria.postId = postId;
@@ -63,6 +60,7 @@ exports.findAll = (req, res) => {
     Notification.find(criteria, function(err, notifications) {
         res.render('listNot', {
             notifications: notifications,
+            logged_in_user_id: req.logged_in_user_id
         });
     });
 };

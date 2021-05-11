@@ -54,10 +54,9 @@ html(lang='en')
     script(src='//ksylvest.github.io/jquery-growl/javascripts/jquery.growl.js')
     script.
       var socket = io.connect('http://localhost:8080');
-      socket.emit('subscribe', 'mychannel');
-      socket.on('mychannel', function(data) {
-        message = JSON.parse(data.message);
-        $.growl.notice({ title: "Nice!", message: message.user_name + " liked your post", location: 'br' });
+      socket.emit('subscribe', 'user-#{logged_in_user_id}');
+      socket.on('message', function(data) {
+        $.growl.notice({ title: "Nice!", message: data.message.user_name + " liked your post", location: 'br' });
       });
     block style
     Style.
